@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <!-- there can be different sessions connected to different databases so each will be specified here-->
+    <session-factory>
+        <!-- driver we'll use for our connection which references the dependency in pom.xml => should be
+        com.mysql.cj.jdbc.Driver????-->
+        <property name="connection.driver_class">
+            com.mysql.cj.jdbc.Driver
+        </property>
+        <!-- URL we'll use to connect to the db : protocole(jdbc:mysql), address, db name-->
+        <property name="connection.url">
+            jdbc:mysql://localhost:3306/bookstore
+        </property>
+        <!-- connection ID :=> we'll get those from environmental variables (a .env folder in which we'll have
+        the connection info that won't be gitted)-->
+        <property name="connection.username">root</property>
+        <property name="connection.password">root</property>
+        <!-- this will log all requests, which HAS TO BE TAKEN OUT before going live -->
+        <property name="show_sql">true</property>
+
+        <!-- mapping our entities to the db, when we give a class you have to give it the full package
+        in spring, this will be automated-->
+        <mapping class="entity.Book"/>
+    </session-factory>
+</hibernate-configuration>
