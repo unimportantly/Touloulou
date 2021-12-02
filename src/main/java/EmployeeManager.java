@@ -1,4 +1,5 @@
 import entity.Employee;
+import factory.EmployeeFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -16,6 +17,7 @@ public class EmployeeManager {
             sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         }
         catch (Exception e){
+            StandardServiceRegistryBuilder.destroy(registry);
             e.printStackTrace();
         }
     }
@@ -45,7 +47,7 @@ public class EmployeeManager {
         if(employee.getAddress() != null){
             oldEmployee.setAddress(employee.getAddress());
         }
-        if(employee.getAge() != 0){
+        if(employee.getAge() != oldEmployee.getAge()){
             oldEmployee.setAge(employee.getAge());
         }
         if(employee.getEmail() != null){
@@ -80,8 +82,19 @@ public class EmployeeManager {
 
     public static void main(String[] args) {
         EmployeeManager employeeManager = new EmployeeManager();
-        Employee employee = new Employee();
-        employee.setJobTitle("Larbin");
-        employee.
+        Employee employee = EmployeeFactory.createEmployee();
+        System.out.println(employee);
+        Employee employee2 = EmployeeFactory.createEmployee();
+        Employee employee3 = EmployeeFactory.createEmployee();
+        Employee employee4 = EmployeeFactory.createEmployee();
+        Employee employee5 = EmployeeFactory.createEmployee();
+        employeeManager.setup();
+        employeeManager.create(employee);
+        employeeManager.create(employee2);
+        employeeManager.create(employee3);
+        employeeManager.create(employee4);
+        employeeManager.create(employee5);
+        employeeManager.read(employee.getID());
+
     }
 }
