@@ -6,7 +6,10 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class EmployeeManager {
@@ -77,6 +80,7 @@ public class EmployeeManager {
         // store the employee to be modified
         Employee oldEmployee = this.read(id);
         // check if the value is to be modified by checking for nullity
+        
         if(employee.getAddress() != null){
             oldEmployee.setAddress(employee.getAddress());
         }
@@ -144,6 +148,19 @@ public class EmployeeManager {
         session.close();
         return employeeList;
     }
+        /*
+        can't understand this...
+        simpler solution must exist
+         */
+//    protected List<Employee> getAllEmployees(){
+//        Session session = sessionFactory.openSession();
+//        EntityManager entityManager = sessionFactory.createEntityManager();
+//        List<Employee> employeeList;
+//        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<Employee> employeeCriteriaQuery = criteriaBuilder.createQuery(Employee.class);
+//        Root<Employee> employeeRoot = employeeCriteriaQuery.from(Employee.class);
+//        employeeCriteriaQuery.select(criteriaBuilder.construct())
+//    }
 
     public static void main(String[] args) {
         EmployeeManager employeeManager = new EmployeeManager();
@@ -165,7 +182,7 @@ public class EmployeeManager {
 //        Employee employee = employeeManager.read(id);
 //        employeeManager.delete(employee);
 //        employeeManager.deleteAll();
-        System.out.println(employeeManager.getAll());
+//        System.out.println(employeeManager.getAll());
         employeeManager.exit();
 
 
