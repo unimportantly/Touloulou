@@ -2,13 +2,15 @@ package entity;
 
 import javax.persistence.*;
 
+// classify this class as an entity, points it to the proper table
 @Entity
 @Table(name="employee")
 public class Employee {
 
-    @Id
-    @Column(name = "id", nullable = false) // is there a point to nullable if we leave a setter?
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id // points to the attribute that'll be coupled with the ID field in the db table
+    @Column(name = "id", nullable = false) // give it the proper name, tells us it can't be null
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // tells the db to generate the ID according to its parameters(here: autoincrement)
     private long ID;
     private String lastname;
     private String firstname;
@@ -19,16 +21,14 @@ public class Employee {
     private String address;
 
 
-
+    /**
+     * empty constructor
+     */
     public Employee() {
     }
 
     public long getID() {
         return ID;
-    }
-
-    public void setID(long ID) {
-        this.ID = ID;
     }
 
     public String getLastname() {

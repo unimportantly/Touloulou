@@ -4,10 +4,9 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-    <!-- there can be different sessions connected to different databases so each will be specified here-->
+    <!-- the session we'll use to connect to this database-->
     <session-factory>
-        <!-- driver we'll use for our connection which references the dependency in pom.xml => should be
-        com.mysql.cj.jdbc.Driver????-->
+        <!-- driver we'll use for the db connection-->
         <property name="connection.driver_class">
             com.mysql.cj.jdbc.Driver
         </property>
@@ -15,15 +14,13 @@
         <property name="connection.url">
             jdbc:mysql://localhost:3306/company
         </property>
-        <!-- connection ID :=> we'll get those from environmental variables (a .env folder in which we'll have
-        the connection info that won't be gitted)-->
+        <!-- connection ID -->
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
-        <!-- this will log all requests, which HAS TO BE TAKEN OUT before going live -->
+        <!-- this will log all requests -->
         <property name="show_sql">true</property>
 
-        <!-- mapping our entities to the db, when we give a class you have to give it the full package
-        in spring, this will be automated-->
+        <!-- mapping our entities to the db to connect to the table properly-->
         <mapping class="entity.Employee"/>
     </session-factory>
 </hibernate-configuration>

@@ -9,6 +9,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 public class EmployeeManager {
 
     protected SessionFactory sessionFactory;
+    protected int nbOfEmployees;
 
     protected void setup(){
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
@@ -33,6 +34,7 @@ public class EmployeeManager {
         session.save(employee);
         session.getTransaction().commit();
         session.close();
+        nbOfEmployees ++;
     }
 
     protected Employee read(long id){
@@ -80,26 +82,38 @@ public class EmployeeManager {
         session.close();
     }
 
+    protected void deleteAll(){
+        Session session = sessionFactory.openSession();
+        for (int i = 1; i <= nbOfEmployees; i++) {
+            if (read(i) != null) {
+                session.beginTransaction();
+                session.delete(this.read(i));
+                session.getTransaction().commit();
+            }
+        }
+        session.close();
+    }
+
     public static void main(String[] args) {
-        EmployeeManager employeeManager = new EmployeeManager();
+//        EmployeeManager employeeManager = new EmployeeManager();
 //        Employee employee = EmployeeFactory.createEmployee();
 //        Employee employee2 = EmployeeFactory.createEmployee();
 //        Employee employee3 = EmployeeFactory.createEmployee();
 //        Employee employee4 = EmployeeFactory.createEmployee();
 //        Employee employee5 = EmployeeFactory.createEmployee();
-        employeeManager.setup();
+//        employeeManager.setup();
 //        employeeManager.create(employee);
 //        employeeManager.create(employee2);
 //        employeeManager.create(employee3);
 //        employeeManager.create(employee4);
 //        employeeManager.create(employee5);
-        //System.out.println(employeeManager.read(employee.getID()));
 //        Employee employee6 = new Employee();
 //        employee6.setJobTitle("Journalist");
-        long id = 7;
+//        long id = 7;
 //        employeeManager.update(id, employee6);
-        Employee employee = employeeManager.read(id);
-        employeeManager.delete(employee);
-        employeeManager.exit();
+//        Employee employee = employeeManager.read(id);
+//        employeeManager.delete(employee);
+//        employeeManager.deleteAll();
+//        employeeManager.exit();
     }
 }
