@@ -82,19 +82,24 @@ public class EmployeeManager {
 
     public static void main(String[] args) {
         EmployeeManager employeeManager = new EmployeeManager();
-        Employee employee = EmployeeFactory.createEmployee();
-        System.out.println(employee);
-        Employee employee2 = EmployeeFactory.createEmployee();
-        Employee employee3 = EmployeeFactory.createEmployee();
-        Employee employee4 = EmployeeFactory.createEmployee();
-        Employee employee5 = EmployeeFactory.createEmployee();
+//        Employee employee = EmployeeFactory.createEmployee();
+//        Employee employee2 = EmployeeFactory.createEmployee();
+//        Employee employee3 = EmployeeFactory.createEmployee();
+//        Employee employee4 = EmployeeFactory.createEmployee();
+//        Employee employee5 = EmployeeFactory.createEmployee();
         employeeManager.setup();
-        employeeManager.create(employee);
-        employeeManager.create(employee2);
-        employeeManager.create(employee3);
-        employeeManager.create(employee4);
-        employeeManager.create(employee5);
-        employeeManager.read(employee.getID());
-
+//        employeeManager.create(employee);
+//        employeeManager.create(employee2);
+//        employeeManager.create(employee3);
+//        employeeManager.create(employee4);
+//        employeeManager.create(employee5);
+        //System.out.println(employeeManager.read(employee.getID()));
+//        Employee employee6 = new Employee();
+//        employee6.setJobTitle("Journalist");
+        long id = 7;
+//        employeeManager.update(id, employee6);
+        Employee employee = employeeManager.read(id);
+        employeeManager.delete(employee);
+        employeeManager.exit();
     }
 }
